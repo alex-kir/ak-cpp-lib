@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <functional>
 
 #include <ak/win32/win32.h>
 #include <ak/ui/ui.h>
