@@ -203,7 +203,7 @@ public:
         busy_secs = 0;
 
         settings.setdefault("gluetime", 600);
-        settings.setdefault("lunchtime", 2400);
+        settings.setdefault("endtime", 28800);
         settings.setdefault("breaktime", 60*60);
         settings.save();
     }
@@ -253,7 +253,7 @@ public:
         (*ss) << "<h3>Settings was reloaded.</h3>";
 
         (*ss) << "<p>gluetime = " << settings.get<int>("gluetime") << "</p>";
-        (*ss) << "<p>lunchtime = " << settings.get<int>("lunchtime") << "</p>";
+        (*ss) << "<p>endtime = " << settings.get<int>("endtime") << "</p>";
         (*ss) << "<p>breaktime = " << settings.get<int>("breaktime") << "</p>";
 
         (*ss) << "<a href='/'>Back</a>";
@@ -463,7 +463,7 @@ public:
                     }
                 }
                 
-                animation = diff > settings.get<int>("lunchtime") || busy_secs > settings.get<int>("breaktime");
+                animation = diff > settings.get<int>("endtime") || busy_secs > settings.get<int>("breaktime");
             }
             
             
