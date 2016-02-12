@@ -9,7 +9,8 @@ namespace ak
         {
             void startup()
             {
-                ::WSAStartup(MAKEWORD(1, 1), &WSADATA());
+                WSADATA data;
+                ::WSAStartup(MAKEWORD(1, 1), &data);
             }
 
             void cleanup()

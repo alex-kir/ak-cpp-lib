@@ -27,7 +27,7 @@ namespace ak
         {
             delete _ss, _ss = 0;
         }
-        virtual const char * what() const
+        virtual const char * what() const throw()
         {
             const_cast<exception*>(this)->_s = _ss->str();
             return _s.c_str();

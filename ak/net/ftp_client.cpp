@@ -65,7 +65,7 @@ namespace ak
             wcommand << "RETR " << r_filename << "\n";
             show_answer();
 
-            std::fstream f(l_filename.c_str(), std::ios::out + std::ios::binary);
+            std::fstream f(l_filename.c_str(), (std::ios_base::openmode)(std::ios::out + std::ios::binary));
             if (f.is_open())
             {
                 int len = 0;
@@ -95,7 +95,7 @@ namespace ak
             wcommand << "STOR " << r_filename << "\n";
             show_answer();
 
-            std::ifstream f(l_filename.c_str(), std::ios::in + std::ios::binary);
+            std::ifstream f(l_filename.c_str(), (std::ios_base::openmode)(std::ios::in + std::ios::binary));
             if (f.is_open())
             {
                 int len = 0;
@@ -129,7 +129,7 @@ namespace ak
             wcommand << "APPE " << r_filename << "\n";
             show_answer();
 
-            std::ifstream f(l_filename.c_str(), std::ios::in + std::ios::binary);
+            std::ifstream f(l_filename.c_str(), (std::ios_base::openmode)(std::ios::in + std::ios::binary));
             if (f.is_open())
             {
                 int len = 0;

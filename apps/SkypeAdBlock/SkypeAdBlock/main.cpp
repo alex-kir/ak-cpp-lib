@@ -5,18 +5,21 @@
 #include <fstream>
 
 
-void main()
+void ak_main()
 {
 	using namespace ak::ui;
 
 	while (true)
 	{
 		ak::system::thread::sleep(0.1f);
+
+		// auto upgrade = "TUpgradeForm"
+
 		auto skype = topwindow::foreground();
 		if (skype.wnd_class_name() == "tSkMainForm" && ak::string::start_with(skype.get_text(), "Skype"))
 		{
 			auto cc = skype.children();
-			for each (auto w in cc)
+			for (auto w: cc)
 			{
 				auto cn = w.wnd_class_name();
 				//ak::console() << cn << "\n";

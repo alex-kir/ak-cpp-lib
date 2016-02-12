@@ -8,7 +8,8 @@ namespace ak
         void open_url(const std::string & url)
         {
             std::string cmd;
-            ak::system::reg::HKCR.open("http\\shell\\open\\command").value_at(0, std::string(), cmd);
+            std::string name;
+            ak::system::reg::HKCR.open("http\\shell\\open\\command").value_at(0, name, cmd);
             int pos1 = cmd.find("%1");
             if (pos1 == std::string::npos)
             { // internet explorer

@@ -140,7 +140,7 @@ namespace ak
         {
             std::vector<argument_info>::iterator ai = std::find_if(_info.begin(), _info.end(), find_ai_by_name(option));
             if (ai != _info.end() && index < ai->values.size())
-                return ak::lexical_cast<Type>(ai->values[index]);
+                return ak::cast<Type>(ai->values[index]);
             else
                 return default1;
         }

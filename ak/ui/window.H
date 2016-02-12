@@ -109,7 +109,7 @@ namespace ak
             void kill_timer(int id);
 		public:
             window & set_font();
-			std::vector<window> window::children();
+			std::vector<window> children();
 		};
     }
 }

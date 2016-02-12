@@ -27,7 +27,7 @@ namespace ak
             template<typename T>
             any_stream & operator >> (T & t)
             {
-                any<throwable> a = data.front();
+                auto a = data.front();
                 data.pop();
                 t = (T)a;
                 return *this;
