@@ -10,9 +10,8 @@
 
 namespace ak
 {
-    class filesystem
+    namespace filesystem
     {
-    public:
         static void directories(const std::string & path, std::vector<std::string> & dirslist, int lvl = 255)
         {
             dirslist.push_back(path);
@@ -56,17 +55,17 @@ namespace ak
         }
 
         
-        static void append_text(const char * filename, const char * content)
-        {
-            append_text<char>(filename, content);
-        }
-
         template<typename CHAR>
         static void append_text(const std::basic_string<CHAR> & filename, const std::basic_string<CHAR> & contents)
         {
             std::ofstream fout(filename.c_str(), std::ios::app);
             fout << contents;
             fout.close();
+        }
+
+        static void append_text(const char * filename, const char * content)
+        {
+            append_text<char>(filename, content);
         }
 
         template<typename CHAR>
@@ -122,6 +121,7 @@ namespace ak
             file.close();
 
         }
+
         inline static void write_bytes(const std::string & filename, const std::vector<unsigned char> & bytes)
         {
             std::ofstream file(filename.c_str(), std::ios_base::binary);
@@ -139,6 +139,7 @@ namespace ak
             str.assign((char*)&bytes[0], bytes.size());
             return str;
         }
+
         inline static void write_text(const std::string & filename, const std::string & text)
         {
             std::ofstream file(filename.c_str(), std::ios_base::binary);
@@ -147,5 +148,46 @@ namespace ak
             file.write((char*)text.c_str(), text.size());
             file.close();
         }
-    };
+
+
+        inline bool file_exist(const std::string & filename)
+        {
+            _finddata_t fileinfo;
+            intptr_t find_ptr = _findfirst(filename.c_str(), &fileinfo);
+            if (find_ptr == -1L)
+                return false;
+            _findclose(find_ptr);
+            return true;
+        }
+
+        inline time_t file_c_time(const std::string & filename)
+        {
+            _finddata_t fileinfo;
+            intptr_t find_ptr = _findfirst(filename.c_str(), &fileinfo);
+            if (find_ptr == -1L)
+                throw ak::exception() << "file_c_time: file not found";
+            _findclose(find_ptr);
+            return fileinfo.time_create;
+        }
+
+        inline time_t file_m_time(const std::string & filename)
+        {
+            _finddata_t fileinfo;
+            intptr_t find_ptr = _findfirst(filename.c_str(), &fileinfo);
+            if (find_ptr == -1L)
+                throw ak::exception() << "file_c_time: file not found";
+            _findclose(find_ptr);
+            return fileinfo.time_write;
+        }
+
+        inline time_t file_a_time(const std::string & filename)
+        {
+            _finddata_t fileinfo;
+            intptr_t find_ptr = _findfirst(filename.c_str(), &fileinfo);
+            if (find_ptr == -1L)
+                throw ak::exception() << "file_c_time: file not found";
+            _findclose(find_ptr);
+            return fileinfo.time_access;
+        }
+    }
 }

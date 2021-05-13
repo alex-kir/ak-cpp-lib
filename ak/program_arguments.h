@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ak/exception.h>
-#include <ak/text/string.h>
+#include <ak/strings/strings.h>
 
 #include <string>
 #include <vector>

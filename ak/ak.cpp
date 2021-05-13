@@ -30,7 +30,7 @@
 #include <ak/net/net.cpp>
 //
 //
-//#include <ak/ui/messagebox.cpp>
+#include <ak/ui/messagebox.cpp>
 //#include <ak/ui/window_utils.cpp>
 //#include <ak/ui/dc.cpp>
 //#include <ak/ui/tooltip.cpp>

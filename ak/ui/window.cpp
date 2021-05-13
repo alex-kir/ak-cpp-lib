@@ -140,14 +140,14 @@ namespace ak
             ::UpdateLayeredWindow((HWND)get_internal_handle(), GetDC(0), 0, &sz, dc.object(), &pt, 0, &blender, ULW_ALPHA);
         }
 
-        window window::parent()
+        window window::parent() const
         {
             window w;
             w.object<HWND>(::GetParent((HWND)get_internal_handle()));
             return w;
         }
 
-        ak::rectanglei window::clientrectangle()
+        ak::rectanglei window::clientrectangle() const
         {
             WINDOWINFO wi;
             wi.cbSize = sizeof(wi);
@@ -155,7 +155,7 @@ namespace ak
             return ak::rectanglei(wi.rcClient.left, wi.rcClient.top, wi.rcClient.right, wi.rcClient.bottom);
         }
 
-        ak::rectangle<int> window::rectangle(bool onscreen)
+        ak::rectangle<int> window::rectangle(bool onscreen) const
         {
             if (onscreen)
             {
@@ -248,7 +248,7 @@ namespace ak
             ::SendMessageA((HWND)get_internal_handle(), (UINT)WM_SETTEXT, 0, (LPARAM)text.c_str());
         }
 
-		std::string window::wnd_class_name()
+		std::string window::wnd_class_name() const
 		{
 			char sz[300];
 			int len = ::GetClassNameA((HWND)get_internal_handle(), sz, 299);
@@ -282,6 +282,28 @@ namespace ak
 		{
 			std::vector<window> ww;
 			::EnumChildWindows((HWND)get_internal_handle(), (WNDENUMPROC)window_children_enum_proc, (LPARAM)&ww);
+
+            auto thisHandle = (HWND)get_internal_handle();
+            auto end = std::remove_if(ww.begin(), ww.end(), [thisHandle](const window & child)-> bool {
+                return child.parent().get_internal_handle() != thisHandle;
+            }); 
+
+            ww.erase(end, ww.end());
+
+            // std::copy_if(ww.begin(), ww.end(), [thisHandle](const window & child)-> bool {
+                // return child.parent().get_internal_handle() != thisHandle;
+            // }); 
+
+
+            // auto thisHandle = (HWND)get_internal_handle();
+            // WNDENUMPROC func = [](HWND hChild, long int param) -> int {
+            //     // auto child = window(hChild);
+            //     // if (child.parent().get_internal_handle() == thisHandle)
+            //         // ww.push_back(child);
+            //     //thisHandle, &ww
+            //     return TRUE;
+            // };
+            // ::EnumChildWindows(thisHandle, func, 0);
 			return ww;
 		}
     }

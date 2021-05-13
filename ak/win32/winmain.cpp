@@ -1,35 +1,48 @@
 
-// #ifndef _CONSOLE
-// #ifdef _WINDOWS_
+#include <ak/strings/strings.h>
 
-// void ak_main();
-
-// int __stdcall WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
-// //int __stdcall WinMain(void*, void*, char*, int)
-// {
-//     ak_main();
-//     return 0;
-// }
-
-// #endif
-// #endif
-
-void ak_main();
+int ak_main(const std::vector<std::string> & args);
 
 #ifdef _CONSOLE
 
 int main(int argc, char **argv)
 {
-	ak_main();
+	try
+	{
+		std::vector<std::string> args;
+		for (int i = 0; i < argc; ++i)
+			args.push_back(std::string(argv[i]));
+
+		return ak_main(args);
+	}
+	catch(const std::exception & ex)
+	{
+		return -1;
+	}
 }
 
 #else
 
 int __stdcall WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
-// int __stdcall WinMain(void*, void*, char*, int)
 {
-    ak_main();
-    return 0;
+	try
+	{
+		int argc;
+		wchar_t ** argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
+
+		std::vector<std::string> args;
+		for (int i = 0; i < argc; ++i)
+		{
+			auto ustr = std::wstring(argv[i]);
+			args.push_back(ak::strings::unicode_to_utf8(ustr));
+		}
+
+		return ak_main(args);
+	}
+	catch(const std::exception & ex)
+	{
+		return -1;
+	}
 }
 
 

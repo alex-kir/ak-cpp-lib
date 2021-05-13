@@ -7,7 +7,7 @@
 
 #include <ak/predicate.h>
 #include <ak/types/types.h>
-#include <ak/text/text.h>
+#include <ak/strings/strings.h>
 
 
 #include <ak/win32/win32.h>

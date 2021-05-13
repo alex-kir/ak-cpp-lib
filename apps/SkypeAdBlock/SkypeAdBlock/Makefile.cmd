@@ -12,7 +12,7 @@ cls
 set flags=
 set flags=%flags% -mwindows
 set flags=%flags% -std=c++0x
-set flags=%flags% -O3 -Os
+::set flags=%flags% -O3 -Os
 
 
 set includes=
@@ -41,4 +41,7 @@ g++ -o skyblock.exe %flags% %includes% %sources% %libraries%
 
 
 pause
+
+::kill skyblock.exe
+
 goto start_compile

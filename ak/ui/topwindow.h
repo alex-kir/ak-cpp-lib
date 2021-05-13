@@ -16,7 +16,7 @@ namespace ak
             void maximize();
             void minimize();
             void restore();
-
+            void close();
         };
     }
 }

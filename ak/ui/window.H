@@ -59,7 +59,7 @@ namespace ak
             }
 
 		public:
-            window parent();
+            window parent() const;
 		public:
             void set_capture();
             void release_capture();
@@ -73,7 +73,8 @@ namespace ak
 		public:
             std::string get_text();
             void set_text(const std::string & text);
-			std::string wnd_class_name();
+			std::string wnd_class_name() const;
+
         private:
             
 		public:
@@ -85,11 +86,11 @@ namespace ak
             void invalidate();
             void update_layered(dc & dc);
 		public:
-            ak::rectangle<int> rectangle(bool onscreen);
+            ak::rectangle<int> rectangle(bool onscreen) const;
             void rectangle(int x, int y, int width, int height);
-            ak::rectangle<int> clientrectangle();
+            ak::rectangle<int> clientrectangle() const;
             
-            point<int> position(bool onscreen) { return rectangle(onscreen).position(); }
+            point<int> position(bool onscreen) const { return rectangle(onscreen).position(); }
             template<typename T>
             void position(const ak::point<T> & pt)
             {

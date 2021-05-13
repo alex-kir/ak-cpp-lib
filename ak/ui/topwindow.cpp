@@ -21,6 +21,10 @@ namespace ak
         {
             ::ShowWindow(object<HWND>(), SW_RESTORE);
         }
+        void topwindow::close()
+        {
+            ::PostMessage(object<HWND>(), WM_CLOSE, 0, 0);
+        }
 		
 		BOOL CALLBACK _topwindow_all_enumerator(HWND h, std::vector<topwindow> * pww)
 		{

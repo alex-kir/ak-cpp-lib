@@ -1,6 +1,6 @@
 #pragma once
 #include <ak/exception.h>
-#include <ak/text/text.h>
+#include <ak/strings/strings.h>
 namespace ak
 {
     namespace reflection

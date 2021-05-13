@@ -1,5 +1,5 @@
 #pragma once
-#include <ak/text/text.h>
+#include <ak/strings/strings.h>
 namespace ak
 {
     namespace net

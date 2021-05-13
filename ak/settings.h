@@ -4,7 +4,7 @@
 #include <fstream>
 #include <ak/system/process.h>
 #include <ak/filesystem.h>
-#include <ak/text/string.h>
+#include <ak/strings/strings.h>
 
 namespace ak
 {
