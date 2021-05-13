@@ -1,0 +1,12 @@
+{
+	settings:{
+		gluetime_sec:300,
+		stoptime_sec:60,
+	},
+	projects:[
+		{
+			folder:"c:\Users\xxx\bitbucket.org\railway_ua\"
+		}
+	]
+
+}
