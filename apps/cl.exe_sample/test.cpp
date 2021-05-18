@@ -5,5 +5,6 @@
 int main()
 {
     std::cout << "Hello, world, from Visual C++!" << std::endl;
-    return 0;
+
+    return 5.6 / 2 ? 0 : 0;
 }
